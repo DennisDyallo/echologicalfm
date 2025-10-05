@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "Echological.fm - Your guide to transformative music",
   "scripts": {
-  "dev": "parcel src/index.html",
-  "build": "parcel build src/index.html",
-  "build:deploy": "parcel build src/index.html --public-url /apps/echological/"
+    "dev": "parcel src/index.html",
+    "build": "parcel build src/index.html",
+    "build:deploy": "parcel build src/index.html --public-url /apps/echological/"
   },
   "keywords": [
     "music",
@@ -15,6 +15,7 @@
   "author": "Echological.fm",
   "license": "MIT",
   "devDependencies": {
+    "@parcel/transformer-webmanifest": "^2.16.0",
     "parcel": "^2.16.0"
   }
 }

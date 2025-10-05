@@ -88,8 +88,10 @@ body {
     color: var(--color-white);
     text-decoration: none;
     font-weight: 500;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
     transition: color var(--transition), opacity var(--transition);
-    opacity: 0.9;
+    opacity: 0.95;
 }
 
 .nav-link:hover,
