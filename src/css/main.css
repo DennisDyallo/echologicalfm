@@ -128,8 +128,12 @@ body {
     color: var(--color-organic-green);
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    margin-bottom: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.brand-oswald {
+    font-family: 'Oswald', sans-serif;
 }
 
 .hero-title {
