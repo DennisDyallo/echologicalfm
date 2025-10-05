@@ -146,11 +146,55 @@ body {
     margin: 0 auto;
 }
 
+.mission h2 {
+    font-size: var(--font-size-2xl);
+    color: var(--color-deep-blue);
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+    font-weight: 600;
+}
+
 .mission-text {
     font-size: var(--font-size-lg);
     line-height: 1.8;
     color: var(--color-deep-blue);
     text-align: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.mission-text:last-child {
+    margin-bottom: 0;
+}
+
+/* About Section */
+.about {
+    background: linear-gradient(135deg, var(--color-off-white) 0%, var(--color-gray-light) 100%);
+    padding: var(--spacing-xl) var(--spacing-md);
+}
+
+.about-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.about h2 {
+    font-size: var(--font-size-2xl);
+    color: var(--color-deep-blue);
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+    font-weight: 600;
+}
+
+.about-text {
+    font-size: var(--font-size-lg);
+    line-height: 1.8;
+    color: var(--color-blue-mid);
+    text-align: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.about-text:last-child {
+    margin-bottom: 0;
 }
 
 /* CTA Section */
@@ -281,9 +325,19 @@ body {
         padding: var(--spacing-lg) var(--spacing-md);
     }
 
-    .mission-text {
+    .mission h2,
+    .about h2 {
+        font-size: var(--font-size-xl);
+    }
+
+    .mission-text,
+    .about-text {
         font-size: var(--font-size-base);
         line-height: 1.7;
+    }
+
+    .about {
+        padding: var(--spacing-lg) var(--spacing-md);
     }
 
     .cta {
