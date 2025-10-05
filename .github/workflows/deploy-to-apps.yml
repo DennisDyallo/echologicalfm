@@ -38,6 +38,7 @@ jobs:
           ls -la
 
       - name: Prepare target directory
+        if: hashFiles(format('{0}/**', env.APP_DIR)) != ''
         run: |
           echo "Preparing target directory: ${{ env.APP_DIR }}"
           echo "Removing old files..."

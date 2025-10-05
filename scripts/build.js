@@ -5,6 +5,7 @@ const path = require('path');
 
 const srcDir = path.join(__dirname, '../src');
 const distDir = path.join(__dirname, '../dist');
+const assetsDir = path.join(__dirname, '../assets');
 
 // Clean and create dist directory
 console.log('🧹 Cleaning dist directory...');
@@ -17,6 +18,25 @@ fs.mkdirSync(distDir, { recursive: true });
 function copyFile(src, dest) {
     fs.copyFileSync(src, dest);
     console.log(`✓ Copied: ${path.basename(dest)}`);
+}
+
+// Function to copy directory recursively
+function copyDir(src, dest) {
+    if (!fs.existsSync(src)) return;
+
+    fs.mkdirSync(dest, { recursive: true });
+    const entries = fs.readdirSync(src, { withFileTypes: true });
+
+    for (const entry of entries) {
+        const srcPath = path.join(src, entry.name);
+        const destPath = path.join(dest, entry.name);
+
+        if (entry.isDirectory()) {
+            copyDir(srcPath, destPath);
+        } else {
+            fs.copyFileSync(srcPath, destPath);
+        }
+    }
 }
 
 // Function to minify CSS (basic)
@@ -72,8 +92,10 @@ const minifiedJS = minifyJS(jsContent);
 fs.writeFileSync(path.join(distDir, 'js/main.js'), minifiedJS);
 console.log('✓ Minified: js/main.js');
 
-// Copy favicon
-copyFile(path.join(srcDir, 'favicon.svg'), path.join(distDir, 'favicon.svg'));
+// Copy assets folder
+console.log('📁 Copying assets...');
+copyDir(assetsDir, path.join(distDir, 'assets'));
+console.log('✓ Copied: assets folder');
 
 // Calculate total size
 function getDirectorySize(dir) {
