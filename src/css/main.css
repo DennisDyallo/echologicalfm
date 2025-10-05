@@ -6,6 +6,7 @@
     --color-teal: #3a7d7c;
     --color-green: #4a9d7e;
     --color-gold: #d4af37;
+    --color-organic-green: #637e6d;
     --color-gold-light: #f0d98e;
 
     /* Neutral colors */
@@ -77,7 +78,7 @@ body {
     margin: 0 auto;
     padding: 0 var(--spacing-md);
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     gap: var(--spacing-md);
 }
@@ -119,6 +120,16 @@ body {
 .hero-content {
     max-width: 900px;
     animation: fadeInUp 1s ease-out;
+}
+
+.hero-brand {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--color-organic-green);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: var(--spacing-lg);
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .hero-title {
@@ -409,5 +420,12 @@ body {
     .nav-container {
         padding: 0 var(--spacing-sm);
         gap: var(--spacing-sm);
+        flex-wrap: wrap;
+    }
+
+    .hero-brand {
+        font-size: 2rem;
+        letter-spacing: 0.08em;
+        margin-bottom: var(--spacing-md);
     }
 }
