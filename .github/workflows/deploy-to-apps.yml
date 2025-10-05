@@ -38,11 +38,10 @@ jobs:
           ls -la
 
       - name: Prepare target directory
-        if: hashFiles(format('{0}/**', env.APP_DIR)) != ''
         run: |
           echo "Preparing target directory: ${{ env.APP_DIR }}"
           echo "Removing old files..."
-          ls -la "${{ env.APP_DIR }}"
+          ls -la "${{ env.APP_DIR }}" || echo "Directory does not exist yet"
           rm -rf "${{ env.APP_DIR }}"
           mkdir -p "${{ env.APP_DIR }}"
 
@@ -51,9 +50,14 @@ jobs:
           echo "Source files in dist/:"
           ls -la dist/
           echo "Copying files to target directory: ${{ env.APP_DIR }}"
-          cp -r dist/* "${{ env.APP_DIR }}"
-          echo "Files copied to target:"
-          ls -la "${{ env.APP_DIR }}"
+          if [ -n "$(ls -A dist/ 2>/dev/null)" ]; then
+            cp -r dist/* "${{ env.APP_DIR }}"
+            echo "Files copied to target:"
+            ls -la "${{ env.APP_DIR }}"
+          else
+            echo "ERROR: dist/ is empty or does not exist"
+            exit 1
+          fi
 
       - name: Configure git
         run: |
@@ -70,7 +74,11 @@ jobs:
           ls -la "apps/${{ env.TARGET_APP_NAME }}/" || echo "Directory does not exist!"
           
           echo "Checking directory structure:"
-          find "apps/${{ env.TARGET_APP_NAME }}" -type f | head -10 || echo "No files found!"
+          if [ -d "apps/${{ env.TARGET_APP_NAME }}" ]; then
+            find "apps/${{ env.TARGET_APP_NAME }}" -type f | head -10 || echo "No files found!"
+          else
+            echo "Directory does not exist yet"
+          fi
           
           echo "Repository status before adding files:"
           git status --porcelain
