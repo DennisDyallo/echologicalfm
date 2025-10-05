@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "Echological.fm - Your guide to transformative music",
   "scripts": {
-    "build:deploy": "node scripts/build.js",
-    "dev": "npx serve src",
-    "clean": "rm -rf dist && mkdir -p dist"
+    "dev": "parcel src/index.html"
   },
   "keywords": [
     "music",
@@ -14,5 +12,7 @@
   ],
   "author": "Echological.fm",
   "license": "MIT",
-  "devDependencies": {}
+  "devDependencies": {
+    "parcel": "^2.16.0"
+  }
 }
