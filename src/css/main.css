@@ -110,7 +110,8 @@ body {
     text-align: center;
     padding: var(--spacing-xl) var(--spacing-md);
     position: relative;
-    background: linear-gradient(135deg, var(--color-deep-blue) 0%, var(--color-blue-mid) 100%);
+    background: linear-gradient(135deg, rgba(26, 47, 74, 0.7) 0%, rgba(45, 74, 106, 0.7) 100%),
+                url('../assets/hero-echological_ups.png') center/cover no-repeat;
 }
 
 .hero-content {
