@@ -1,3 +1,5 @@
+# Remember, needs a Personal Access Token (PAT) with repo permissions stored in TARGET_REPO_PAT secret
+
 name: Build and Deploy to dennisdyallo.github.io/apps
 on:
   push:
