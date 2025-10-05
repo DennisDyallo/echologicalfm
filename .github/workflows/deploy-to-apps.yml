@@ -1,0 +1,98 @@
+name: Build and Deploy to dennisdyallo.github.io/apps
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    env:
+      TARGET_REPO_OWNER: dennisdyallo
+      TARGET_REPO_NAME: dennisdyallo.github.io
+      TARGET_APP_NAME: event-countdown
+      APP_DIR: dennisdyallo.github.io/apps/event-countdown
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build:deploy
+
+      - name: Clone target repository
+        run: |
+          git clone "https://x-access-token:${{ secrets.TARGET_REPO_PAT }}@github.com/${{ env.TARGET_REPO_OWNER }}/${{ env.TARGET_REPO_NAME }}.git" "${{ env.TARGET_REPO_NAME }}"
+          echo "Verifying cloned repository:"
+          cd "${{ env.TARGET_REPO_NAME }}"
+          git status
+          git log --oneline -5
+          echo "Repository structure:"
+          ls -la
+
+      - name: Prepare target directory
+        run: |
+          echo "Preparing target directory: ${{ env.APP_DIR }}"
+          echo "Removing old files..."
+          ls -la "${{ env.APP_DIR }}"
+          rm -rf "${{ env.APP_DIR }}"
+          mkdir -p "${{ env.APP_DIR }}"
+
+      - name: Copy build output
+        run: |
+          echo "Source files in dist/:"
+          ls -la dist/
+          echo "Copying files to target directory: ${{ env.APP_DIR }}"
+          cp -r dist/* "${{ env.APP_DIR }}"
+          echo "Files copied to target:"
+          ls -la "${{ env.APP_DIR }}"
+
+      - name: Configure git
+        run: |
+          cd "${{ env.TARGET_REPO_NAME }}"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Check for changes and commit
+        run: |
+          cd "${{ env.TARGET_REPO_NAME }}"
+          echo "Current directory: $(pwd)"
+          
+          echo "Checking if target app directory exists:"
+          ls -la "apps/${{ env.TARGET_APP_NAME }}/" || echo "Directory does not exist!"
+          
+          echo "Checking directory structure:"
+          find "apps/${{ env.TARGET_APP_NAME }}" -type f | head -10 || echo "No files found!"
+          
+          echo "Repository status before adding files:"
+          git status --porcelain
+          
+          git add "apps/${{ env.TARGET_APP_NAME }}"
+          
+          echo "Repository status after git add:"
+          git status --porcelain
+          
+          # Show what files are staged
+          echo "Files to be committed:"
+          git diff --staged --name-only
+          
+          # Check if there are any changes
+          if git diff --staged --quiet; then
+            echo "No changes detected in the staged files."
+            echo "Full git status:"
+            git status
+            echo "Let's check what's actually in the apps directory:"
+            ls -la apps/ || echo "apps directory doesn't exist"
+          else
+            echo "Changes detected, committing..."
+            git commit -m "Deploy from ${{ github.repository }}: ${{ github.sha }}"
+            git push
+            echo "Successfully deployed!"
+          fi
