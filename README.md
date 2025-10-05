@@ -21,12 +21,14 @@ echologicalfm/
 │   ├── index.html          # Main HTML file
 │   ├── css/
 │   │   └── main.css        # Styles with responsive design
+│   ├── assets/
+│   │   ├── icon.webp       # Simple, clean icon for favicon
+│   │   ├── favicon.svg     # Optional vector icon
+│   │   └── hero.png        # Hero image
 │   ├── js/
 │   │   └── main.js         # Subtle animations
 │   └── favicon.svg         # SVG favicon
 ├── dist/                   # Build output (generated)
-├── scripts/
-│   └── build.js            # Build script
 ├── .github/
 │   └── workflows/
 │       └── deploy-to-apps.yml  # GitHub Actions deployment
@@ -59,28 +61,6 @@ npm run dev
 
 This will serve the `src/` directory using a local server. Open the URL shown in your terminal.
 
-### Building
-
-To build the optimized production version:
-
-```bash
-npm run build:deploy
-```
-
-This will:
-- Minify HTML, CSS, and JavaScript
-- Copy all files to the `dist/` folder
-- Display the total bundle size
-- Verify size is under 50KB target
-
-### Clean Build
-
-To clean the dist folder:
-
-```bash
-npm run clean
-```
-
 ## Deployment
 
 ### Automatic Deployment (GitHub Actions)
@@ -96,22 +76,6 @@ The site is configured to automatically deploy to `dennisdyallo.github.io/apps/e
 2. Workflow runs `npm run build:deploy`
 3. Built files from `dist/` are copied to `dennisdyallo.github.io/apps/echological`
 4. Changes are committed and pushed automatically
-
-### Manual Deployment
-
-1. Build the project:
-   ```bash
-   npm run build:deploy
-   ```
-
-2. Deploy the contents of the `dist/` folder to your hosting provider
-
-## Performance
-
-- **Target bundle size:** < 50KB
-- **No external dependencies**
-- **Critical CSS inlined**
-- **Optimized for modern browsers**
 
 ## Design Specifications
 

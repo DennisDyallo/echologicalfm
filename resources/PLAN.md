@@ -56,10 +56,16 @@ TECHNICAL REQUIREMENTS:
 File Structure:
 /src
   index.html
+  /assets
+    icon.webp (simple, clean icon for favicon)
+    favicon.svg (optional vector icon)
+    hero.png
   /css
     main.css
   /js
     main.js (optional, for subtle animations only)
+
+    
 Build Setup:
 
 Create package.json with build scripts
@@ -72,21 +78,11 @@ Performance:
 Optimize for fast load times
 No external dependencies
 Inline critical CSS
-Target total size under 50KB
-
-GITHUB ACTIONS SETUP:
-Update the workflow environment variables to:
-yamlTARGET_APP_NAME: echological
-APP_DIR: dennisdyallo.github.io/apps/echological
-DELIVERABLES:
 
 Complete HTML structure (index.html)
 Modern CSS with responsive design (main.css)
 Optional JavaScript for subtle interactions (main.js)
-package.json with build configuration
-Updated GitHub Actions workflow file (.github/workflows/deploy-to-apps.yml)
 README.md with setup and deployment instructions
-Simple favicon (SVG preferred)
 
 STYLE PREFERENCES:
 
@@ -103,5 +99,3 @@ Pure HTML/CSS/JS (no frameworks)
 Keep it under 50KB total
 Must work in all modern browsers
 No external libraries
-
-Generate all files needed for immediate deployment.
