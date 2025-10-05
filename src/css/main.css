@@ -90,9 +90,11 @@ body {
     opacity: 0.9;
 }
 
-.nav-link:hover {
+.nav-link:hover,
+.nav-link:focus {
     opacity: 1;
     color: var(--color-gold-light);
+    outline: none;
 }
 
 .instagram-icon {
@@ -139,6 +141,17 @@ body {
 .mission {
     background: var(--color-white);
     padding: var(--spacing-xl) var(--spacing-md);
+    position: relative;
+}
+
+.mission::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-teal) 0%, var(--color-green) 50%, var(--color-gold) 100%);
 }
 
 .mission-content {
@@ -149,9 +162,21 @@ body {
 .mission h2 {
     font-size: var(--font-size-2xl);
     color: var(--color-deep-blue);
-    margin-bottom: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
     text-align: center;
     font-weight: 600;
+    position: relative;
+    padding-bottom: var(--spacing-sm);
+}
+
+.mission h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-teal), var(--color-gold));
+    margin: var(--spacing-sm) auto 0;
+    border-radius: 2px;
 }
 
 .mission-text {
@@ -170,6 +195,7 @@ body {
 .about {
     background: linear-gradient(135deg, var(--color-off-white) 0%, var(--color-gray-light) 100%);
     padding: var(--spacing-xl) var(--spacing-md);
+    position: relative;
 }
 
 .about-content {
@@ -180,9 +206,21 @@ body {
 .about h2 {
     font-size: var(--font-size-2xl);
     color: var(--color-deep-blue);
-    margin-bottom: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
     text-align: center;
     font-weight: 600;
+    position: relative;
+    padding-bottom: var(--spacing-sm);
+}
+
+.about h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-teal), var(--color-gold));
+    margin: var(--spacing-sm) auto 0;
+    border-radius: 2px;
 }
 
 .about-text {
@@ -234,10 +272,13 @@ body {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.cta-button:hover {
+.cta-button:hover,
+.cta-button:focus {
     background: var(--color-gold-light);
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    outline: 2px solid var(--color-gold-light);
+    outline-offset: 2px;
 }
 
 /* Footer */
@@ -262,8 +303,10 @@ body {
     transition: color var(--transition);
 }
 
-.footer-link:hover {
+.footer-link:hover,
+.footer-link:focus {
     color: var(--color-gold);
+    outline: none;
 }
 
 .footer-divider {
@@ -365,5 +408,6 @@ body {
 
     .nav-container {
         padding: 0 var(--spacing-sm);
+        gap: var(--spacing-sm);
     }
 }
