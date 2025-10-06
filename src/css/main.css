@@ -138,11 +138,43 @@ body {
     background: rgba(0, 0, 0, 0.05);
     border-radius: 50%;
     padding: 4px;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.nav-logo-link:hover {
+    transform: scale(1.1);
+    background: rgba(0, 0, 0, 0.15);
 }
 
 .nav-logo-img {
     height: 50px;
     width: auto;
+}
+
+/* Logo style variations */
+.logo-option1 .nav-logo-img {
+    filter: saturate(0.6);
+}
+
+.logo-option2 .nav-logo-img {
+    filter: grayscale(0.3) saturate(0.7);
+}
+
+.logo-option3 .nav-logo-img {
+    filter: brightness(0.85) contrast(0.9);
+}
+
+.logo-option4 .nav-logo-img {
+    filter: sepia(0.15) saturate(0.7) brightness(0.9);
+}
+
+.logo-option5 .nav-logo-img {
+    opacity: 0.75;
+    filter: saturate(0.8);
+}
+
+.logo-option6 .nav-logo-img {
+    filter: saturate(0.5) brightness(0.9) contrast(0.85);
 }
 
 .nav-link {
