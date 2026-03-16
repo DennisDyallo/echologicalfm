@@ -93,10 +93,20 @@ This script:
 
 The main `echological.fm` domain also hosts sub-paths served as static files:
 
-- `echological.fm/hazaaheli/epk/` — Electronic Press Kit for Haza Aheli & The Hazayana Collective
+- `echological.fm/hazaaheli/` — Interactive site for Haza Aheli (Gemini AI features, charts, tabbed bios)
   - Source: `~/Code/other/hazaaheli/index.html`
+  - Deployed to: `~/services/echological-fm/site/hazaaheli/`
+- `echological.fm/hazaaheli/epk/` — Condensed Electronic Press Kit for Haza Aheli & The Hazayana Collective
+  - Source: `~/Code/other/hazaaheli/epk/index.html`
   - Deployed to: `~/services/echological-fm/site/hazaaheli/epk/`
-  - No build step — copy `index.html` and `hero.png` manually
+  - Deploy both routes with `~/Code/other/hazaaheli/deploy.sh`
+
+### Other Hosted Sites
+
+- `feliciafalck.com` — Felicia Falck artist site (Nordic Folk, Medicine Music)
+  - Source: `~/Code/other/feliciafalck/index.html`
+  - Deployed to: `~/services/feliciafalck/site/`
+  - Deploy with `~/Code/other/feliciafalck/deploy.sh`
 
 ## Design Specifications
 
