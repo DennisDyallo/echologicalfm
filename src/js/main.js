@@ -1,26 +1,22 @@
-// Echological.fm - Minimal JavaScript for subtle animations
+// Echological.fm - Refined animations and interactions
 
-// Intersection Observer for fade-in animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
+// Reveal observer for scroll animations
+const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.classList.add('fade-in');
-            observer.unobserve(entry.target);
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
         }
     });
-}, observerOptions);
+}, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+});
 
-// Observe elements on page load
 document.addEventListener('DOMContentLoaded', () => {
-    // Add fade-in animation to mission and CTA sections
-    const sections = document.querySelectorAll('.mission, .cta');
-    sections.forEach(section => {
-        observer.observe(section);
+    // Observe all reveal elements
+    document.querySelectorAll('.reveal').forEach(el => {
+        revealObserver.observe(el);
     });
 
     // Smooth scroll for anchor links
@@ -33,7 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     behavior: 'smooth',
                     block: 'start'
                 });
-                // Close mobile menu if open
                 const navMenu = document.querySelector('.nav-menu');
                 const hamburger = document.querySelector('.hamburger');
                 if (navMenu && hamburger) {
@@ -56,25 +51,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Optional: Add a subtle parallax effect to hero on scroll (very lightweight)
-let ticking = false;
-
-function updateHeroParallax() {
-    const hero = document.querySelector('.hero');
-    if (hero && window.scrollY < window.innerHeight) {
-        const scrolled = window.scrollY;
-        const parallax = scrolled * 0.3;
-        hero.style.transform = `translateY(${parallax}px)`;
-    }
-    ticking = false;
+// Nav scroll state
+const nav = document.querySelector('.nav');
+if (nav) {
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 80);
+    });
 }
-
-window.addEventListener('scroll', () => {
-    if (!ticking) {
-        window.requestAnimationFrame(() => {
-            updateHeroParallax();
-            ticking = false;
-        });
-        ticking = true;
-    }
-});
