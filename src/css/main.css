@@ -231,7 +231,23 @@ a { text-decoration: none; color: inherit; transition: all 0.4s cubic-bezier(0.2
     padding: 0 2.5rem 8vh;
     position: relative;
     overflow: hidden;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background: url('../assets/hero.png') center/cover no-repeat;
+    animation: heroZoom 25s ease-in-out infinite alternate;
+    z-index: 0;
+}
+
+@keyframes heroZoom {
+    from { transform: scale(1); }
+    to { transform: scale(1.06); }
 }
 
 .hero::before {
